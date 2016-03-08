@@ -10,14 +10,16 @@ Supports overriding values using environment variables.
             {"app": {"env": "local"}}
         ]
     )
-    print json.dumps(config, indent=2)
     
-        {
-          "app": {
-            "env": "local"
-          }
-        }    
+    print json.dumps(config, indent=2)
+    # prints out the following
+    {
+      "app": {
+        "env": "local"
+      }
+    }    
         
+    
     # add an environment variable
     export CUSTOM_app__env="production"
     
@@ -29,10 +31,11 @@ Supports overriding values using environment variables.
         env_var_pfx="CUSTOM",
         auto_cast=True
     )
-    print json.dumps(config, indent=2)        
     
-        {
-          "app": {
+    print json.dumps(config, indent=2)        
+    # prints out the following
+    {
+        "app": {
             "env": "production"
-          }
-        }        
+        }
+    }
