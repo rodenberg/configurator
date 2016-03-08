@@ -1,0 +1,10 @@
+{
+	"database": {
+		"type": "postgres",
+		"name": "my_db",
+		"username": "admin",
+		"password": "supersecretpassword",
+		"host": "216.58.218.174",
+		"port": 5432
+	}
+}
