@@ -2,7 +2,10 @@
 
 
 *   Supports any number of configuration objects
+    * Each object in the list overrides the previous value
+    
 *   Supports overriding via environment variables
+    * When using environment variables, the environment variable will always take precedence over all other configs
  
  
 ### Create a configuration object using two dictionaries 
