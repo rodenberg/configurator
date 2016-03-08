@@ -1,17 +1,19 @@
 # Configurator - Simple Python Configuration
 
-This is a simple python module used to cascade override a list of dictionaries
 
-Supports overriding values using environment variables.
-
+*   Supports any number of configuration objects
+*   Supports overriding via environment variables
+ 
+ 
+### Create a configuration object using two dictionaries 
     config = Configurator(
         [
             {"app": {"env": "dev"}},
             {"app": {"env": "local"}}
         ]
     )
-    
-    print json.dumps(config, indent=2)
+    print(config.app.env) # prints out local
+    print(json.dumps(config, indent=2))
     # prints out the following
     {
       "app": {
@@ -19,10 +21,10 @@ Supports overriding values using environment variables.
       }
     }    
         
-    
+### Create a configuration object using two dictionaries w/ environment vars
     # add an environment variable
     export CUSTOM_app__env="production"
-    
+    ...
     config = Configurator(
         [
             {"app": {"env": "dev"}},
@@ -31,7 +33,7 @@ Supports overriding values using environment variables.
         env_var_pfx="CUSTOM",
         auto_cast=True
     )
-    
+    print(config.app.env) # prints out "production" 
     print json.dumps(config, indent=2)        
     # prints out the following
     {

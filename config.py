@@ -150,19 +150,9 @@ if __name__ == "__main__":
             cfg = json.loads(data)
             configurations[x] = cfg
 
-    config = Configurator(
-        [
-            {"app": {"env": "dev"}},
-            {"app": {"env": "local"}}
-        ],
-        env_var_pfx="CUSTOM",
-        auto_cast=True
-    )
-    print json.dumps(config, indent=2)
-
     # create a configurator instance, override with environment variables starting with CUSTOM_
-    # config = Configurator(configurations, env_var_pfx="CUSTOM", auto_cast_env_vars=True)
-    # print(config.database.username)
-    # print(config.database.password)
-    # print(config.database.host)
-    # print(config.database.port)
+    config = Configurator(configurations, env_var_pfx="CUSTOM", auto_cast=True)
+    print(config.database.username)
+    print(config.database.password)
+    print(config.database.host)
+    print(config.database.port)
