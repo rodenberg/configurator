@@ -36,12 +36,12 @@ class _Wrapper(dict):
 
 
 class Configurator(_Wrapper):
-    def __init__(self, configs, env_var_pfx=None, auto_cast_env_vars=False):
+    def __init__(self, configs, env_var_pfx=None, auto_cast=False):
         """
         Constructor for the Configurator class.
         :param configs: A list of configuration objects
         :param env_var_pfx: (optional) the environment variable prefix for loading the env var config
-        :param auto_cast_env_vars: (optional) Flag specifying whether or not to cast the env var values to python types
+        :param auto_cast: (optional) Flag specifying whether or not to cast the env var values to python types
         """
 
         if not isinstance(configs, list):
@@ -49,7 +49,7 @@ class Configurator(_Wrapper):
             configs = configs[configs]
 
         if env_var_pfx:
-            configs.append(Configurator.get_env_vars(env_var_pfx, auto_cast=auto_cast_env_vars))
+            configs.append(Configurator.get_env_vars(env_var_pfx, auto_cast=auto_cast))
 
         for config in configs:
             self._override(config)
@@ -150,9 +150,19 @@ if __name__ == "__main__":
             cfg = json.loads(data)
             configurations[x] = cfg
 
+    config = Configurator(
+        [
+            {"app": {"env": "dev"}},
+            {"app": {"env": "local"}}
+        ],
+        env_var_pfx="CUSTOM",
+        auto_cast=True
+    )
+    print json.dumps(config, indent=2)
+
     # create a configurator instance, override with environment variables starting with CUSTOM_
-    config = Configurator(configurations, env_var_pfx="CUSTOM", auto_cast_env_vars=True)
-    print(config.database.username)
-    print(config.database.password)
-    print(config.database.host)
-    print(config.database.port)
+    # config = Configurator(configurations, env_var_pfx="CUSTOM", auto_cast_env_vars=True)
+    # print(config.database.username)
+    # print(config.database.password)
+    # print(config.database.host)
+    # print(config.database.port)
